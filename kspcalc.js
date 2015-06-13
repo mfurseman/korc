@@ -533,6 +533,8 @@ function findOptimalStage(args) {
 	var stage = null;
 	//parallel stages must have two stacks, or the same # of stacks (if greater) as the next stage (simplifies design)
 	var stackMultiplier = Math.max((args.next.multiplier || 1), ((args.parallel || (args.next.lfoEngines && (args.next.lfoEngines.length > 1 || (args.next.lfoEngines[0] || 0).last)) || (args.next.boosters && (args.next.boosters.length > 1 || (args.next.boosters[0] || 0).last))) ? 2 : 1));
+	// Always use an odd number of stacks
+	stackMultiplier = stackMultiplier - (stackMultiplier % 2);
 	var bestStackDecoupler, bestRadialDecoupler;
 	
 	//
